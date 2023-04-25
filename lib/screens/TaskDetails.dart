@@ -170,6 +170,8 @@ class _TaskDetailsState extends State<TaskDetails> {
           onTap: () {
             setState(() {
               isChatPresent = true;
+              closed = false;
+              ship = false;
             });
           },
           child: Card(
