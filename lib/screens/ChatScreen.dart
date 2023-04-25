@@ -38,7 +38,7 @@ class _ChatScreenState extends State<ChatScreen> {
             style: TextStyle(color: Colors.white),
           ),
           received: false,
-          chatBubbleColor: Colors.purple,
+          chatBubbleColor: Colors.indigo,
         ),
         const ChatMessage(
           id: 'chat-message',
@@ -53,11 +53,11 @@ class _ChatScreenState extends State<ChatScreen> {
             ? const ChatMessage(
                 id: 'chat-message',
                 content: Text(
-                  'I`ve just closed the project.',
-                  style: TextStyle(color: Colors.white),
+                  'Task`s has been completed and project has been closed.',
+                  style: TextStyle(color: Colors.white, fontSize: 12),
                 ),
                 received: false,
-                chatBubbleColor: Colors.purple,
+                chatBubbleColor: Colors.indigo,
               )
             : widget.isShipped
                 ? const ChatMessage(
@@ -67,7 +67,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       style: TextStyle(color: Colors.white),
                     ),
                     received: false,
-                    chatBubbleColor: Colors.purple,
+                    chatBubbleColor: Colors.indigo,
                   )
                 : widget.isReview
                     ? const ChatMessage(
@@ -77,7 +77,7 @@ class _ChatScreenState extends State<ChatScreen> {
                           style: TextStyle(color: Colors.white),
                         ),
                         received: false,
-                        chatBubbleColor: Colors.purple,
+                        chatBubbleColor: Colors.indigo,
                       )
                     : const SizedBox(),
         const ChatMessage(
@@ -96,13 +96,13 @@ class _ChatScreenState extends State<ChatScreen> {
             style: TextStyle(color: Colors.white),
           ),
           received: false,
-          chatBubbleColor: Colors.purple,
+          chatBubbleColor: Colors.indigo,
         ),
         widget.isClosed
             ? const ChatMessage(
                 id: 'chat-message',
                 content: Text(
-                  'Welcome!',
+                  'Welcome mann!',
                   style: TextStyle(color: Colors.black),
                 ),
                 received: true,

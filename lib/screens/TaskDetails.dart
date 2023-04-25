@@ -64,11 +64,39 @@ class _TaskDetailsState extends State<TaskDetails> {
                   _buildShippedColumn('Shipped'),
                   _buildClosedColumn('Closed'),
                   if (isChatPresent || ship || closed)
-                    SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.32,
-                        child: _chatMessage())
-                  else
-                    const SizedBox(),
+                    LayoutBuilder(builder:
+                        (BuildContext context, BoxConstraints constraints) {
+                      if (constraints.maxWidth < 600) {
+                        // change the value of 600 as per your requirement
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: const Text(
+                                  "This feature is only supported on web view"),
+                              content: const Text(
+                                  "Please use a desktop or a laptop to access this feature."),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: const Text("OK"),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      }
+                      return SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.32,
+                          child: _chatMessage());
+                    })
+                  //   SizedBox(
+                  //       width: MediaQuery.of(context).size.width * 0.32,
+                  //       child: _chatMessage())
+                  // else
+                  //   const SizedBox(),
                 ],
               ),
             ],
