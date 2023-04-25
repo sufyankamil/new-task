@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 
 import '../common/chat.dart';
@@ -51,7 +49,6 @@ class _ChatScreenState extends State<ChatScreen> {
           received: true,
           chatBubbleColor: Colors.white,
         ),
-
         widget.isClosed
             ? const ChatMessage(
                 id: 'chat-message',
@@ -83,31 +80,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         chatBubbleColor: Colors.purple,
                       )
                     : const SizedBox(),
-        // ChatMessage(
-        //   id: 'chat-message',
-        //   content: widget.isReview
-        //       ? Text(
-        //           'I`ve just reviewed the project.',
-        //           style: TextStyle(color: Colors.white),
-        //         )
-        //       : widget.isShipped
-        //           ? Text(
-        //               'I`ve just shipped the project.',
-        //               style: TextStyle(color: Colors.white),
-        //             )
-        //           : widget.isClosed
-        //               ? Text(
-        //                   'I`ve just closed the project.',
-        //                   style: TextStyle(color: Colors.white),
-        //                 )
-        //               : Text(
-        //                   'I`ve just reviewed the project.',
-        //                   style: TextStyle(color: Colors.white),
-        //                 ),
-        //   received: false,
-        //   chatBubbleColor: Colors.purple,
-        // ),
-        ChatMessage(
+        const ChatMessage(
           id: 'chat-message',
           content: Text(
             'Great! Keep it up!',
@@ -116,7 +89,7 @@ class _ChatScreenState extends State<ChatScreen> {
           received: true,
           chatBubbleColor: Colors.white,
         ),
-        ChatMessage(
+        const ChatMessage(
           id: 'chat-message',
           content: Text(
             'Thanks!',
@@ -125,6 +98,17 @@ class _ChatScreenState extends State<ChatScreen> {
           received: false,
           chatBubbleColor: Colors.purple,
         ),
+        widget.isClosed
+            ? const ChatMessage(
+                id: 'chat-message',
+                content: Text(
+                  'Welcome!',
+                  style: TextStyle(color: Colors.black),
+                ),
+                received: true,
+                chatBubbleColor: Colors.white,
+              )
+            : Container()
       ],
     ));
   }

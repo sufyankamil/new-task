@@ -30,9 +30,21 @@ class _TaskDetailsState extends State<TaskDetails> {
         children: [
           Row(
             children: [
+              // icon for release
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.account_balance_wallet_rounded),
+                iconSize: 30,
+              ),
               TextButton(
                 onPressed: () {},
                 child: const Text(Constants.release),
+              ),
+              // icon for board
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.dashboard),
+                iconSize: 30,
               ),
               TextButton(
                 onPressed: () {},
@@ -59,11 +71,6 @@ class _TaskDetailsState extends State<TaskDetails> {
                     const SizedBox(),
                 ],
               ),
-              // if (isChatPresent) Wrap(
-              //   children:  [
-              //     _chatMessage()
-              //   ],
-              // ) else const SizedBox(),
             ],
           ),
         ],
@@ -81,12 +88,17 @@ class _TaskDetailsState extends State<TaskDetails> {
             });
           },
           child: Card(
-            elevation: 4, // sets the elevation of the card
+            elevation: 3, // sets the elevation of the card
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(
                   8.0), // sets the rounded corners of the card
             ),
             child: Container(
+              decoration: const BoxDecoration(
+                border: Border(
+                  top: BorderSide(color: Colors.yellow, width: 3),
+                ),
+              ),
               padding: const EdgeInsets.all(
                   16.0), // sets the padding of the card content
               width: 300.0, // sets the width of the card
@@ -228,6 +240,11 @@ class _TaskDetailsState extends State<TaskDetails> {
                 8.0), // sets the rounded corners of the card
           ),
           child: Container(
+            decoration: const BoxDecoration(
+              border: Border(
+                top: BorderSide(color: Colors.blue, width: 3),
+              ),
+            ),
             padding: const EdgeInsets.all(
                 16.0), // sets the padding of the card content
             width: 300.0, // sets the width of the card
@@ -456,6 +473,11 @@ class _TaskDetailsState extends State<TaskDetails> {
                   8.0), // sets the rounded corners of the card
             ),
             child: Container(
+              decoration: const BoxDecoration(
+                border: Border(
+                  top: BorderSide(color: Colors.green, width: 3),
+                ),
+              ),
               padding: const EdgeInsets.all(
                   16.0), // sets the padding of the card content
               width: 300.0, // sets the width of the card
