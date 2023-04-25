@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:task_screens/common/constants.dart';
 
 import '../common/chat.dart';
+import 'ChatScreen.dart';
 
 class TaskDetails extends StatefulWidget {
   const TaskDetails({Key? key}) : super(key: key);
@@ -17,6 +18,10 @@ class TaskDetails extends StatefulWidget {
 
 class _TaskDetailsState extends State<TaskDetails> {
   bool isChatPresent = false;
+
+  bool ship = false;
+
+  bool closed = false;
 
   @override
   Widget build(BuildContext context) {
@@ -46,9 +51,13 @@ class _TaskDetailsState extends State<TaskDetails> {
                   _buildReviewColumn('Review'),
                   _buildShippedColumn('Shipped'),
                   _buildClosedColumn('Closed'),
-                  if (isChatPresent) SizedBox(child: _chatMessage()) else const SizedBox(),
+                  if (isChatPresent || ship || closed)
+                    SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.32,
+                        child: _chatMessage())
+                  else
+                    const SizedBox(),
                 ],
-
               ),
               // if (isChatPresent) Wrap(
               //   children:  [
@@ -65,87 +74,100 @@ class _TaskDetailsState extends State<TaskDetails> {
   Widget _buildReviewColumn(String column) {
     return Column(
       children: [
-        Card(
-          elevation: 4, // sets the elevation of the card
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-                8.0), // sets the rounded corners of the card
-          ),
-          child: Container(
-            padding: const EdgeInsets.all(
-                16.0), // sets the padding of the card content
-            width: 300.0, // sets the width of the card
-            height: MediaQuery.of(context).size.height /
-                10, // sets the height of the card
-            child: Row(
-              children: [
-                Text(
-                  column,
-                  style: const TextStyle(
-                    fontSize: 18.0, // sets the font size of the text
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              isChatPresent = true;
+            });
+          },
+          child: Card(
+            elevation: 4, // sets the elevation of the card
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(
+                  8.0), // sets the rounded corners of the card
+            ),
+            child: Container(
+              padding: const EdgeInsets.all(
+                  16.0), // sets the padding of the card content
+              width: 300.0, // sets the width of the card
+              height: MediaQuery.of(context).size.height /
+                  10, // sets the height of the card
+              child: Row(
+                children: [
+                  Text(
+                    column,
+                    style: const TextStyle(
+                      fontSize: 18.0, // sets the font size of the text
+                    ),
                   ),
-                ),
-                const Spacer(),
-                const Icon(Icons.add),
-              ],
+                  const Spacer(),
+                  const Icon(Icons.add),
+                ],
+              ),
             ),
           ),
         ),
         // cards which have all the tasks for the one which is under review section
-        Card(
-          elevation: 4, // sets the elevation of the card
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-                8.0), // sets the rounded corners of the card
-          ),
-          child: Container(
-            padding: const EdgeInsets.all(
-                16.0), // sets the padding of the card content
-            width: 300.0, // sets the width of the card
-            height: MediaQuery.of(context).size.height /
-                6.5, // sets the height of the card
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text(
-                  Constants.releaseCard,
-                  style: TextStyle(
-                    fontSize: 14.0, // sets the font size of the text
-                    color: Colors.grey,
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              isChatPresent = true;
+            });
+          },
+          child: Card(
+            elevation: 4, // sets the elevation of the card
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(
+                  8.0), // sets the rounded corners of the card
+            ),
+            child: Container(
+              padding: const EdgeInsets.all(
+                  16.0), // sets the padding of the card content
+              width: 300.0, // sets the width of the card
+              height: MediaQuery.of(context).size.height /
+                  6.5, // sets the height of the card
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const [
+                  Text(
+                    Constants.releaseCard,
+                    style: TextStyle(
+                      fontSize: 14.0, // sets the font size of the text
+                      color: Colors.grey,
+                    ),
                   ),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  Constants.reviewCardContent,
-                  style: TextStyle(
-                    fontSize: 18.0, // sets the font size of the text
+                  SizedBox(height: 10),
+                  Text(
+                    Constants.reviewCardContent,
+                    style: TextStyle(
+                      fontSize: 18.0, // sets the font size of the text
+                    ),
                   ),
-                ),
-                SizedBox(height: 10),
-                Icon(Icons.flag, color: Colors.yellow),
-              ],
+                  SizedBox(height: 10),
+                  Icon(Icons.flag, color: Colors.yellow),
+                ],
+              ),
             ),
           ),
         ),
-        Card(
-          elevation: 4, // sets the elevation of the card
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-                8.0), // sets the rounded corners of the card
-          ),
-          child: Container(
-            padding: const EdgeInsets.all(
-                16.0), // sets the padding of the card content
-            width: 300.0, // sets the width of the card
-            height: MediaQuery.of(context).size.height /
-                6.5, // sets the height of the card
-            child: GestureDetector(
-              onTap: () {
-                setState(() {
-                  // set isChatPresent to ture and again set it to false when the chat is closed
-                  isChatPresent = !isChatPresent;
-                });
-              },
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              isChatPresent = true;
+            });
+          },
+          child: Card(
+            elevation: 4, // sets the elevation of the card
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(
+                  8.0), // sets the rounded corners of the card
+            ),
+            child: Container(
+              padding: const EdgeInsets.all(
+                  16.0), // sets the padding of the card content
+              width: 300.0, // sets the width of the card
+              height: MediaQuery.of(context).size.height /
+                  6.5, // sets the height of the card
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -226,154 +248,182 @@ class _TaskDetailsState extends State<TaskDetails> {
           ),
         ),
         // cards which have all the tasks for the one which is under review section
-        Card(
-          elevation: 4, // sets the elevation of the card
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-                8.0), // sets the rounded corners of the card
-          ),
-          child: Container(
-            padding: const EdgeInsets.all(
-                16.0), // sets the padding of the card content
-            width: 300.0, // sets the width of the card
-            height: MediaQuery.of(context).size.height /
-                6.5, // sets the height of the card
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text(
-                  Constants.releaseCard,
-                  style: TextStyle(
-                    fontSize: 14.0, // sets the font size of the text
-                    color: Colors.grey,
-                  ),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  Constants.shippedCardContent,
-                  style: TextStyle(
-                    fontSize: 18.0, // sets the font size of the text
-                  ),
-                ),
-                SizedBox(height: 10),
-                Icon(Icons.flag, color: Colors.yellow),
-              ],
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              ship = true;
+            });
+          },
+          child: Card(
+            elevation: 4, // sets the elevation of the card
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(
+                  8.0), // sets the rounded corners of the card
             ),
-          ),
-        ),
-        Card(
-          elevation: 4, // sets the elevation of the card
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-                8.0), // sets the rounded corners of the card
-          ),
-          child: Container(
-            padding: const EdgeInsets.all(
-                16.0), // sets the padding of the card content
-            width: 300.0, // sets the width of the card
-            height: MediaQuery.of(context).size.height /
-                6.5, // sets the height of the card
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text(
-                  Constants.releaseCard,
-                  style: TextStyle(
-                    fontSize: 14.0, // sets the font size of the text
-                    color: Colors.grey,
-                  ),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  Constants.shippedCardContent1,
-                  style: TextStyle(
-                    fontSize: 18.0, // sets the font size of the text
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        Card(
-          elevation: 4, // sets the elevation of the card
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-                8.0), // sets the rounded corners of the card
-          ),
-          child: Container(
-            padding: const EdgeInsets.all(
-                16.0), // sets the padding of the card content
-            width: 300.0, // sets the width of the card
-            height: MediaQuery.of(context).size.height /
-                6.5, // sets the height of the card
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                const Text(
-                  Constants.releaseCard,
-                  style: TextStyle(
+            child: Container(
+              padding: const EdgeInsets.all(
+                  16.0), // sets the padding of the card content
+              width: 300.0, // sets the width of the card
+              height: MediaQuery.of(context).size.height /
+                  6.5, // sets the height of the card
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const [
+                  Text(
+                    Constants.releaseCard,
+                    style: TextStyle(
                       fontSize: 14.0, // sets the font size of the text
-                      color: Colors.grey),
-                ),
-                const SizedBox(height: 10),
-                const Text(
-                  Constants.shippedCardContent2,
-                  style:
-                      TextStyle(fontSize: 18.0 // sets the font size of the text
-                          ),
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  children: const [
-                    Text(
-                      "3",
-                      style: TextStyle(
-                          fontSize: 14.0, // sets the font size of the text
-                          color: Colors.grey),
+                      color: Colors.grey,
                     ),
-                    SizedBox(width: 10),
-                    // chat bubble icon
-                    Icon(Icons.chat_bubble, color: Colors.grey, size: 17),
-                    SizedBox(width: 10),
-                    Icon(Icons.flag, color: Colors.green),
-                  ],
-                ),
-              ],
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    Constants.shippedCardContent,
+                    style: TextStyle(
+                      fontSize: 18.0, // sets the font size of the text
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Icon(Icons.flag, color: Colors.yellow),
+                ],
+              ),
             ),
           ),
         ),
-        Card(
-          elevation: 4, // sets the elevation of the card
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-                8.0), // sets the rounded corners of the card
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              ship = true;
+            });
+          },
+          child: Card(
+            elevation: 4, // sets the elevation of the card
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(
+                  8.0), // sets the rounded corners of the card
+            ),
+            child: Container(
+              padding: const EdgeInsets.all(
+                  16.0), // sets the padding of the card content
+              width: 300.0, // sets the width of the card
+              height: MediaQuery.of(context).size.height /
+                  6.5, // sets the height of the card
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const [
+                  Text(
+                    Constants.releaseCard,
+                    style: TextStyle(
+                      fontSize: 14.0, // sets the font size of the text
+                      color: Colors.grey,
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    Constants.shippedCardContent1,
+                    style: TextStyle(
+                      fontSize: 18.0, // sets the font size of the text
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
-          child: Container(
-            padding: const EdgeInsets.all(
-                16.0), // sets the padding of the card content
-            width: 300.0, // sets the width of the card
-            height: MediaQuery.of(context).size.height /
-                6.5, // sets the height of the card
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text(
-                  Constants.releaseCard,
-                  style: TextStyle(
-                    fontSize: 14.0, // sets the font size of the text
-                    color: Colors.grey,
+        ),
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              ship = true;
+            });
+          },
+          child: Card(
+            elevation: 4, // sets the elevation of the card
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(
+                  8.0), // sets the rounded corners of the card
+            ),
+            child: Container(
+              padding: const EdgeInsets.all(
+                  16.0), // sets the padding of the card content
+              width: 300.0, // sets the width of the card
+              height: MediaQuery.of(context).size.height /
+                  6.5, // sets the height of the card
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  const Text(
+                    Constants.releaseCard,
+                    style: TextStyle(
+                        fontSize: 14.0, // sets the font size of the text
+                        color: Colors.grey),
                   ),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  Constants.shippedCardContent3,
-                  style: TextStyle(
-                    fontSize: 18.0, // sets the font size of the text
+                  const SizedBox(height: 10),
+                  const Text(
+                    Constants.shippedCardContent2,
+                    style: TextStyle(
+                        fontSize: 18.0 // sets the font size of the text
+                        ),
                   ),
-                ),
-                SizedBox(height: 10),
-                Icon(Icons.flag, color: Colors.yellow),
-              ],
+                  const SizedBox(height: 10),
+                  Row(
+                    children: const [
+                      Text(
+                        "3",
+                        style: TextStyle(
+                            fontSize: 14.0, // sets the font size of the text
+                            color: Colors.grey),
+                      ),
+                      SizedBox(width: 10),
+                      // chat bubble icon
+                      Icon(Icons.chat_bubble, color: Colors.grey, size: 17),
+                      SizedBox(width: 10),
+                      Icon(Icons.flag, color: Colors.green),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              ship = true;
+            });
+          },
+          child: Card(
+            elevation: 4, // sets the elevation of the card
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(
+                  8.0), // sets the rounded corners of the card
+            ),
+            child: Container(
+              padding: const EdgeInsets.all(
+                  16.0), // sets the padding of the card content
+              width: 300.0, // sets the width of the card
+              height: MediaQuery.of(context).size.height /
+                  6.5, // sets the height of the card
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const [
+                  Text(
+                    Constants.releaseCard,
+                    style: TextStyle(
+                      fontSize: 14.0, // sets the font size of the text
+                      color: Colors.grey,
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    Constants.shippedCardContent3,
+                    style: TextStyle(
+                      fontSize: 18.0, // sets the font size of the text
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Icon(Icons.flag, color: Colors.yellow),
+                ],
+              ),
             ),
           ),
         ),
@@ -393,118 +443,139 @@ class _TaskDetailsState extends State<TaskDetails> {
   Widget _buildClosedColumn(String column) {
     return Column(
       children: [
-        Card(
-          elevation: 4, // sets the elevation of the card
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-                8.0), // sets the rounded corners of the card
-          ),
-          child: Container(
-            padding: const EdgeInsets.all(
-                16.0), // sets the padding of the card content
-            width: 300.0, // sets the width of the card
-            height: MediaQuery.of(context).size.height /
-                10, // sets the height of the card
-            child: Row(
-              children: [
-                Text(
-                  column,
-                  style: const TextStyle(
-                    fontSize: 18.0, // sets the font size of the text
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              closed = true;
+            });
+          },
+          child: Card(
+            elevation: 4, // sets the elevation of the card
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(
+                  8.0), // sets the rounded corners of the card
+            ),
+            child: Container(
+              padding: const EdgeInsets.all(
+                  16.0), // sets the padding of the card content
+              width: 300.0, // sets the width of the card
+              height: MediaQuery.of(context).size.height /
+                  10, // sets the height of the card
+              child: Row(
+                children: [
+                  Text(
+                    column,
+                    style: const TextStyle(
+                      fontSize: 18.0, // sets the font size of the text
+                    ),
                   ),
-                ),
-                const Spacer(),
-                const Icon(Icons.add),
-              ],
+                  const Spacer(),
+                  const Icon(Icons.add),
+                ],
+              ),
             ),
           ),
         ),
         // cards which have all the tasks for the one which is under review section
-        Card(
-          elevation: 4, // sets the elevation of the card
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-                8.0), // sets the rounded corners of the card
-          ),
-          child: Container(
-            padding: const EdgeInsets.all(
-                16.0), // sets the padding of the card content
-            width: 300.0, // sets the width of the card
-            height: MediaQuery.of(context).size.height /
-                6.5, // sets the height of the card
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text(
-                  Constants.releaseCard,
-                  style: TextStyle(
-                    fontSize: 14.0, // sets the font size of the text
-                    color: Colors.grey,
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              closed = true;
+            });
+          },
+          child: Card(
+            elevation: 4, // sets the elevation of the card
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(
+                  8.0), // sets the rounded corners of the card
+            ),
+            child: Container(
+              padding: const EdgeInsets.all(
+                  16.0), // sets the padding of the card content
+              width: 300.0, // sets the width of the card
+              height: MediaQuery.of(context).size.height /
+                  6.5, // sets the height of the card
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const [
+                  Text(
+                    Constants.releaseCard,
+                    style: TextStyle(
+                      fontSize: 14.0, // sets the font size of the text
+                      color: Colors.grey,
+                    ),
                   ),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  Constants.closedCardContent,
-                  style: TextStyle(
-                    fontSize: 18.0, // sets the font size of the text
+                  SizedBox(height: 10),
+                  Text(
+                    Constants.closedCardContent,
+                    style: TextStyle(
+                      fontSize: 18.0, // sets the font size of the text
+                    ),
                   ),
-                ),
-                SizedBox(height: 10),
-                Icon(Icons.flag, color: Colors.red),
-              ],
+                  SizedBox(height: 10),
+                  Icon(Icons.flag, color: Colors.red),
+                ],
+              ),
             ),
           ),
         ),
-        Card(
-          elevation: 4, // sets the elevation of the card
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-                8.0), // sets the rounded corners of the card
-          ),
-          child: Container(
-            padding: const EdgeInsets.all(
-                16.0), // sets the padding of the card content
-            width: 300.0, // sets the width of the card
-            height: MediaQuery.of(context).size.height /
-                6.5, // sets the height of the card
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                const Text(
-                  Constants.releaseCard,
-                  style: TextStyle(
-                      fontSize: 14.0, // sets the font size of the text
-                      color: Colors.grey),
-                ),
-                const SizedBox(height: 10),
-                const Text(
-                  Constants.closedCardContent1,
-                  style:
-                      TextStyle(fontSize: 18.0 // sets the font size of the text
-                          ),
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  children: const [
-                    Text(
-                      "+4",
-                      style: TextStyle(
-                          fontSize: 14.0, // sets the font size of the text
-                          color: Colors.grey),
-                    ),
-                    // icon for tag and pin
-                    Icon(Icons.tag, color: Colors.grey, size: 17),
-                    SizedBox(width: 10),
-                    Text(
-                      "+5",
-                      style: TextStyle(
-                          fontSize: 14.0, // sets the font size of the text
-                          color: Colors.grey),
-                    ),
-                    Icon(Icons.attach_file, color: Colors.grey, size: 17),
-                  ],
-                ),
-              ],
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              closed = true;
+            });
+          },
+          child: Card(
+            elevation: 4, // sets the elevation of the card
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(
+                  8.0), // sets the rounded corners of the card
+            ),
+            child: Container(
+              padding: const EdgeInsets.all(
+                  16.0), // sets the padding of the card content
+              width: 300.0, // sets the width of the card
+              height: MediaQuery.of(context).size.height /
+                  6.5, // sets the height of the card
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  const Text(
+                    Constants.releaseCard,
+                    style: TextStyle(
+                        fontSize: 14.0, // sets the font size of the text
+                        color: Colors.grey),
+                  ),
+                  const SizedBox(height: 10),
+                  const Text(
+                    Constants.closedCardContent1,
+                    style: TextStyle(
+                        fontSize: 18.0 // sets the font size of the text
+                        ),
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: const [
+                      Text(
+                        "+4",
+                        style: TextStyle(
+                            fontSize: 14.0, // sets the font size of the text
+                            color: Colors.grey),
+                      ),
+                      // icon for tag and pin
+                      Icon(Icons.tag, color: Colors.grey, size: 17),
+                      SizedBox(width: 10),
+                      Text(
+                        "+5",
+                        style: TextStyle(
+                            fontSize: 14.0, // sets the font size of the text
+                            color: Colors.grey),
+                      ),
+                      Icon(Icons.attach_file, color: Colors.grey, size: 17),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -513,20 +584,22 @@ class _TaskDetailsState extends State<TaskDetails> {
   }
 
   Widget _chatMessage() {
-    return Container(
+    return SizedBox(
       height: 600,
       width: 400,
       child: ListView(
         shrinkWrap: true,
         children: <Widget>[
           Row(
-            children:  [
+            children: [
               // back icon for the chat screen to hide
               IconButton(
-                icon: Icon(Icons.arrow_back),
+                icon: const Icon(Icons.arrow_back),
                 onPressed: () {
                   setState(() {
                     isChatPresent = false;
+                    ship = false;
+                    closed = false;
                   });
                 },
               ),
@@ -540,10 +613,12 @@ class _TaskDetailsState extends State<TaskDetails> {
               const Spacer(),
               // cross icon for the chat screen to hide
               IconButton(
-                icon: Icon(Icons.close),
+                icon: const Icon(Icons.close),
                 onPressed: () {
                   setState(() {
                     isChatPresent = false;
+                    ship = false;
+                    closed = false;
                   });
                 },
               ),
@@ -572,60 +647,14 @@ class _TaskDetailsState extends State<TaskDetails> {
               ]),
           const SizedBox(height: 10),
           const Divider(),
-          ChatMessage(
-            id: 'chat-message',
-            content: Text(
-              'Hi Jason! How are you?',
-              style: TextStyle(color: Colors.black),
-            ),
-            received: true,
-            chatBubbleColor: Colors.white,
-          ),
-          ChatMessage(
-            id: 'chat-message',
-            content: Text(
-              'I`m good, how about you?',
-              style: TextStyle(color: Colors.white),
-            ),
-            received: false,
-            chatBubbleColor: Colors.purple,
-          ),
-          ChatMessage(
-            id: 'chat-message',
-            content: Text(
-              'How is the work going?',
-              style: TextStyle(color: Colors.black),
-            ),
-            received: true,
-            chatBubbleColor: Colors.white,
-          ),
-          ChatMessage(
-            id: 'chat-message',
-            content: Text(
-              'I`ve just checked done 5 tasks.',
-              style: TextStyle(color: Colors.white),
-            ),
-            received: false,
-            chatBubbleColor: Colors.purple,
-          ),
-          ChatMessage(
-            id: 'chat-message',
-            content: Text(
-              'Great! Keep it up!',
-              style: TextStyle(color: Colors.black),
-            ),
-            received: true,
-            chatBubbleColor: Colors.white,
-          ),
-          ChatMessage(
-            id: 'chat-message',
-            content: Text(
-              'Thanks!',
-              style: TextStyle(color: Colors.white),
-            ),
-            received: false,
-            chatBubbleColor: Colors.purple,
-          ),
+          SizedBox(
+              height: 500,
+              width: 400,
+              child: ChatScreen(
+                isReview: isChatPresent,
+                isShipped: ship,
+                isClosed: closed,
+              )),
         ],
       ),
     );
