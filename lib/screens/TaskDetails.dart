@@ -1,6 +1,7 @@
 // this file has all the tasks list in the column with cards in it and the cards in the column
 
 import 'package:flutter/material.dart';
+import 'package:task_screens/common/constants.dart';
 
 import '../common/chat.dart';
 
@@ -20,53 +21,43 @@ class _TaskDetailsState extends State<TaskDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        // color: Colors.green,
-        child: Column(
-          children: [
-            Row(
-              children: [
-                TextButton(
-                  onPressed: () {},
-                  child: const Text('Release Project'),
-                ),
-                TextButton(
-                  onPressed: () {},
-                  child: const Text('Board'),
-                ),
-              ],
-            ),
-            const SizedBox(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Wrap(
-                  spacing: 10,
-                  children: [
-                    _buildReviewColumn('Review'),
-                    _buildShippedColumn('Shipped'),
-                    _buildClosedColumn('Closed'),
-                  ],
-                ),
-                isChatPresent
-                    ? SizedBox(
-                  height: MediaQuery.of(context).size.height / 1.5,
-                  width: 400,
-                        // width: 430,
-                        child: _chatMessage(),
-                        // child: Row(
-                        //   // mainAxisAlignment: MainAxisAlignment.end,
-                        //   crossAxisAlignment: CrossAxisAlignment.end,
-                        //   children: [
-                        //     _chatMessage(),
-                        //   ],
-                        // ),
-                      )
-                    : const SizedBox(),
-              ],
-            ),
-          ],
-        ),
+      body: Column(
+        children: [
+          Row(
+            children: [
+              TextButton(
+                onPressed: () {},
+                child: const Text(Constants.release),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: const Text(Constants.board),
+              ),
+            ],
+          ),
+          const SizedBox(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Wrap(
+                verticalDirection: VerticalDirection.down,
+                spacing: 10,
+                children: [
+                  _buildReviewColumn('Review'),
+                  _buildShippedColumn('Shipped'),
+                  _buildClosedColumn('Closed'),
+                  if (isChatPresent) SizedBox(child: _chatMessage()) else const SizedBox(),
+                ],
+
+              ),
+              // if (isChatPresent) Wrap(
+              //   children:  [
+              //     _chatMessage()
+              //   ],
+              // ) else const SizedBox(),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -117,7 +108,7 @@ class _TaskDetailsState extends State<TaskDetails> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
                 Text(
-                  "Release Project > Stage 1",
+                  Constants.releaseCard,
                   style: TextStyle(
                     fontSize: 14.0, // sets the font size of the text
                     color: Colors.grey,
@@ -125,7 +116,7 @@ class _TaskDetailsState extends State<TaskDetails> {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  "End to End Speed Test",
+                  Constants.reviewCardContent,
                   style: TextStyle(
                     fontSize: 18.0, // sets the font size of the text
                   ),
@@ -159,14 +150,14 @@ class _TaskDetailsState extends State<TaskDetails> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   const Text(
-                    "Release Project > Stage 1",
+                    Constants.releaseCard,
                     style: TextStyle(
                         fontSize: 14.0, // sets the font size of the text
                         color: Colors.grey),
                   ),
                   const SizedBox(height: 10),
                   const Text(
-                    "API Integration",
+                    Constants.reviewCardContent1,
                     style: TextStyle(
                         fontSize: 18.0 // sets the font size of the text
                         ),
@@ -197,7 +188,7 @@ class _TaskDetailsState extends State<TaskDetails> {
           width: 300,
           child: Row(children: const [
             Icon(Icons.add, color: Colors.grey),
-            Text("NEW TASK", style: TextStyle(color: Colors.grey)),
+            Text(Constants.newTask, style: TextStyle(color: Colors.grey)),
             Spacer(),
           ]),
         ),
@@ -251,7 +242,7 @@ class _TaskDetailsState extends State<TaskDetails> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
                 Text(
-                  "Release Project > Stage 1",
+                  Constants.releaseCard,
                   style: TextStyle(
                     fontSize: 14.0, // sets the font size of the text
                     color: Colors.grey,
@@ -259,7 +250,7 @@ class _TaskDetailsState extends State<TaskDetails> {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  "Speed Test Audit",
+                  Constants.shippedCardContent,
                   style: TextStyle(
                     fontSize: 18.0, // sets the font size of the text
                   ),
@@ -286,7 +277,7 @@ class _TaskDetailsState extends State<TaskDetails> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
                 Text(
-                  "Release Project > Stage 1",
+                  Constants.releaseCard,
                   style: TextStyle(
                     fontSize: 14.0, // sets the font size of the text
                     color: Colors.grey,
@@ -294,7 +285,7 @@ class _TaskDetailsState extends State<TaskDetails> {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  "Deploy Updated Git Library",
+                  Constants.shippedCardContent1,
                   style: TextStyle(
                     fontSize: 18.0, // sets the font size of the text
                   ),
@@ -319,14 +310,14 @@ class _TaskDetailsState extends State<TaskDetails> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 const Text(
-                  "Release Project > Stage 1",
+                  Constants.releaseCard,
                   style: TextStyle(
                       fontSize: 14.0, // sets the font size of the text
                       color: Colors.grey),
                 ),
                 const SizedBox(height: 10),
                 const Text(
-                  "Enable Branch Protection",
+                  Constants.shippedCardContent2,
                   style:
                       TextStyle(fontSize: 18.0 // sets the font size of the text
                           ),
@@ -367,7 +358,7 @@ class _TaskDetailsState extends State<TaskDetails> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
                 Text(
-                  "Release Project > Stage 1",
+                  Constants.releaseCard,
                   style: TextStyle(
                     fontSize: 14.0, // sets the font size of the text
                     color: Colors.grey,
@@ -375,7 +366,7 @@ class _TaskDetailsState extends State<TaskDetails> {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  "Budget assessment",
+                  Constants.shippedCardContent3,
                   style: TextStyle(
                     fontSize: 18.0, // sets the font size of the text
                   ),
@@ -391,7 +382,7 @@ class _TaskDetailsState extends State<TaskDetails> {
           width: 300,
           child: Row(children: const [
             Icon(Icons.add, color: Colors.grey),
-            Text("NEW TASK", style: TextStyle(color: Colors.grey)),
+            Text(Constants.newTask, style: TextStyle(color: Colors.grey)),
             Spacer(),
           ]),
         ),
@@ -445,7 +436,7 @@ class _TaskDetailsState extends State<TaskDetails> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
                 Text(
-                  "Release Project > Stage 1",
+                  Constants.releaseCard,
                   style: TextStyle(
                     fontSize: 14.0, // sets the font size of the text
                     color: Colors.grey,
@@ -453,7 +444,7 @@ class _TaskDetailsState extends State<TaskDetails> {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  "Linux TroubleShoot",
+                  Constants.closedCardContent,
                   style: TextStyle(
                     fontSize: 18.0, // sets the font size of the text
                   ),
@@ -480,14 +471,14 @@ class _TaskDetailsState extends State<TaskDetails> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 const Text(
-                  "Release Project > Stage 1",
+                  Constants.releaseCard,
                   style: TextStyle(
                       fontSize: 14.0, // sets the font size of the text
                       color: Colors.grey),
                 ),
                 const SizedBox(height: 10),
                 const Text(
-                  "Angular Framework Test",
+                  Constants.closedCardContent1,
                   style:
                       TextStyle(fontSize: 18.0 // sets the font size of the text
                           ),
@@ -523,34 +514,62 @@ class _TaskDetailsState extends State<TaskDetails> {
 
   Widget _chatMessage() {
     return Container(
-      height: MediaQuery.of(context).size.height / 1.5,
+      height: 600,
       width: 400,
-      color: Colors.yellow,
       child: ListView(
-        clipBehavior: Clip.none,
-        children: <Widget> [
+        shrinkWrap: true,
+        children: <Widget>[
           Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+            children:  [
+              // back icon for the chat screen to hide
+              IconButton(
+                icon: Icon(Icons.arrow_back),
+                onPressed: () {
+                  setState(() {
+                    isChatPresent = false;
+                  });
+                },
+              ),
+              const SizedBox(width: 10),
+              const Text(
+                'Chat',
+                style: TextStyle(
+                  fontSize: 18.0, // sets the font size of the text
+                ),
+              ),
+              const Spacer(),
+              // cross icon for the chat screen to hide
+              IconButton(
+                icon: Icon(Icons.close),
+                onPressed: () {
+                  setState(() {
+                    isChatPresent = false;
+                  });
+                },
+              ),
+            ],
+          ),
+          Row(
+              mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: const [
-            // circular avatar
-             CircleAvatar(
-              radius: 20,
-              backgroundColor: Colors.white,
-              backgroundImage: AssetImage('assets/images/self.png')
-            ),
-            SizedBox(width: 10),
-             Text(
-              'Jason',
-              style: TextStyle(
-                fontSize: 18.0, // sets the font size of the text
-              ),
-            ),
-            Spacer(),
-            Icon(Icons.call, color: Colors.grey),
-            SizedBox(width: 10),
-            Icon(Icons.videocam, color: Colors.grey),
-          ]),
+                // circular avatar
+                CircleAvatar(
+                    radius: 20,
+                    backgroundColor: Colors.white,
+                    backgroundImage: AssetImage('assets/images/self.png')),
+                SizedBox(width: 10),
+                Text(
+                  'Jason',
+                  style: TextStyle(
+                    fontSize: 18.0, // sets the font size of the text
+                  ),
+                ),
+                Spacer(),
+                Icon(Icons.call, color: Colors.grey),
+                SizedBox(width: 10),
+                Icon(Icons.videocam, color: Colors.grey),
+              ]),
           const SizedBox(height: 10),
           const Divider(),
           ChatMessage(
