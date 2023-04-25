@@ -85,6 +85,8 @@ class _TaskDetailsState extends State<TaskDetails> {
           onTap: () {
             setState(() {
               isChatPresent = true;
+              closed = false;
+              ship = false;
             });
           },
           child: Card(
@@ -124,6 +126,8 @@ class _TaskDetailsState extends State<TaskDetails> {
           onTap: () {
             setState(() {
               isChatPresent = true;
+              closed = false;
+              ship = false;
             });
           },
           child: Card(
@@ -269,6 +273,8 @@ class _TaskDetailsState extends State<TaskDetails> {
           onTap: () {
             setState(() {
               ship = true;
+              isChatPresent = false;
+              closed = false;
             });
           },
           child: Card(
@@ -311,6 +317,8 @@ class _TaskDetailsState extends State<TaskDetails> {
           onTap: () {
             setState(() {
               ship = true;
+              isChatPresent = false;
+              closed = false;
             });
           },
           child: Card(
@@ -351,6 +359,8 @@ class _TaskDetailsState extends State<TaskDetails> {
           onTap: () {
             setState(() {
               ship = true;
+              isChatPresent = false;
+              closed = false;
             });
           },
           child: Card(
@@ -406,6 +416,8 @@ class _TaskDetailsState extends State<TaskDetails> {
           onTap: () {
             setState(() {
               ship = true;
+              isChatPresent = false;
+              closed = false;
             });
           },
           child: Card(
@@ -464,6 +476,8 @@ class _TaskDetailsState extends State<TaskDetails> {
           onTap: () {
             setState(() {
               closed = true;
+              ship = false;
+              isChatPresent = false;
             });
           },
           child: Card(
@@ -503,6 +517,8 @@ class _TaskDetailsState extends State<TaskDetails> {
           onTap: () {
             setState(() {
               closed = true;
+              ship = false;
+              isChatPresent = false;
             });
           },
           child: Card(
@@ -545,6 +561,8 @@ class _TaskDetailsState extends State<TaskDetails> {
           onTap: () {
             setState(() {
               closed = true;
+              ship = false;
+              isChatPresent = false;
             });
           },
           child: Card(
