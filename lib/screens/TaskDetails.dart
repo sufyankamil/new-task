@@ -1,9 +1,5 @@
-// this file has all the tasks list in the column with cards in it and the cards in the column
-
 import 'package:flutter/material.dart';
 import 'package:task_screens/common/constants.dart';
-
-import '../common/chat.dart';
 import 'ChatScreen.dart';
 
 class TaskDetails extends StatefulWidget {
@@ -17,11 +13,23 @@ class TaskDetails extends StatefulWidget {
 }
 
 class _TaskDetailsState extends State<TaskDetails> {
+  final TextEditingController _dateController = TextEditingController();
+
+  DateTime? _selectedDate;
+
   bool isChatPresent = false;
 
   bool ship = false;
 
   bool closed = false;
+
+  String date = '';
+
+  @override
+  void dispose() {
+    _dateController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +38,6 @@ class _TaskDetailsState extends State<TaskDetails> {
         children: [
           Row(
             children: [
-              // icon for release
               IconButton(
                 onPressed: () {},
                 icon: const Icon(Icons.account_balance_wallet_rounded),
@@ -49,6 +56,47 @@ class _TaskDetailsState extends State<TaskDetails> {
               TextButton(
                 onPressed: () {},
                 child: const Text(Constants.board),
+              ),
+              Expanded(
+                child: Flex(
+                  direction: Axis.horizontal,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    IconButton(
+                      onPressed: () async {
+                        DateTime? date = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(1900),
+                          lastDate: DateTime(2100),
+                        );
+                        // format the date to display in the text field
+                        if (date != null) {
+                          setState(() {
+                            _dateController.text =
+                            '${date.year}-${date.month}-${date.day}';
+                            _selectedDate = date;
+                          });
+                        }
+                      },
+                      icon: const Icon(Icons.calendar_today, size: 20, color: Colors.blueAccent,),
+                      iconSize: 30,
+                    ),
+                    // text field to display the selected date
+                    SizedBox(
+                      width: 200,
+                      child: TextFormField(
+                        controller: _dateController,
+                        decoration: InputDecoration(
+                          labelText: _dateController.text.isEmpty
+                              ? 'Select a date'
+                              : 'Selected date',
+                        ),
+                        enabled: false,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
@@ -92,11 +140,6 @@ class _TaskDetailsState extends State<TaskDetails> {
                           width: MediaQuery.of(context).size.width * 0.32,
                           child: _chatMessage());
                     })
-                  //   SizedBox(
-                  //       width: MediaQuery.of(context).size.width * 0.32,
-                  //       child: _chatMessage())
-                  // else
-                  //   const SizedBox(),
                 ],
               ),
             ],
